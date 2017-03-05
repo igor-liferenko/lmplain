@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # TODO: duplicate everything related to quoteright and replace slot 255 in lm-tex.mpe with myquoteright
-# algorithm is as follows: `grep quoteright *.fls' and duplicate everything related to it as myquoteright
+# algorithm is as follows: `cat *.fls|xargs -n1 grep quoteright' and duplicate everything related to it as myquoteright
 # NOTE: before setting slot 255 to myquoteright, perform this check:
 # replace quoteright with myquoteright in lm-tex.mpe - running `lmplain' must not show any differences
 
@@ -180,11 +180,11 @@ for FONT in "${!CMtoLM[@]}"; do
   #diff -q rm-$LMFONT.pl $FONT.pl || diff -u rm-$LMFONT.pl $FONT.pl
   # generate again with changed sources
   cd /usr/local/lmfonts/
+  rm -f *.fls
   if [ "$1" = "" ]; then
     mpost -jobname=$FONT "\\relax generating:=1; input $LMFONT" >/dev/null
   else
     mpost -rec -jobname=$FONT "\\relax generating:=1; input $LMFONT"
-    cat $FONT.fls
   fi
   cd /tmp/lmplain/
   tftopl -charcode-format=octal /usr/local/share/texmf/fonts/tfm/$FONT.tfm > chk-$FONT.pl
