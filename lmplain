@@ -171,9 +171,9 @@ for FONT in "${!CMtoLM[@]}"; do
   perl -i -pe 's/$/\n   (MAP\n      (SELECTFONT D 0)\n      (SETCHAR O 47)\n      )/ if /^\(CHARACTER O 377/' $FONT.vpl
   vptovf $FONT.vpl /usr/local/share/texmf/fonts/vf/$FONT.vf /usr/local/share/texmf/fonts/tfm/$FONT.tfm
   # Generate tfm file separately from making virtual font:
-  cp "${LMtoENC["$LMFONT"]}" lm-tex.mpe
-  # first generate by default to ensure that everything is correct
-  # (uncomment the following 4 lines when you will finish modifying LM-fonts)
+  # first generate by default to ensure that there are no bugs in metapost
+  # (uncomment the following 5 lines when you will finish modifying LM-fonts)
+  #cp "${LMtoENC["$LMFONT"]}" lm-tex.mpe
   #mpost -jobname=$FONT "\\relax generating:=1; input $LMFONT" >/dev/null
   #tftopl -charcode-format=octal rm-$LMFONT > rm-$LMFONT.pl
   #tftopl -charcode-format=octal $FONT.tfm > $FONT.pl
@@ -181,6 +181,7 @@ for FONT in "${!CMtoLM[@]}"; do
   # generate again with changed sources
   cd /usr/local/lmfonts/
   rm -f *.fls
+  cp "${LMtoENC["$LMFONT"]}" lm-tex.mpe
   if [ "$1" = "" ]; then
     mpost -jobname=$FONT "\\relax generating:=1; input $LMFONT" >/dev/null
   else
