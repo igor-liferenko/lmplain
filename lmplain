@@ -193,7 +193,7 @@ texhash /usr/local/share/texmf >/dev/null # FIXME: check if it is necessary when
 cd
 rm -fr /tmp/lmplain/
 [ "$1" = "" ] || exit
-tex -ini -enc -jobname lmplain lmplain.ini >/dev/null || echo ERROR
+tex -ini -enc -jobname lmplain /usr/local/lmplain/lmplain.ini >/dev/null || echo ERROR
 mv lmplain.fmt /usr/local/share/texmf/web2c/tex/
 ### create missing lmtex10 font ###
 tftopl -charcode-format=octal cmtex10 > lmtex10.vpl
