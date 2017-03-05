@@ -1,0 +1,31 @@
+%%%% This file belongs to the Latin Modern package. The work is released
+%%%% under the GUST Font License. See the MANIFEST-Latin-Modern.txt and
+%%%% README-Latin-Modern.txt files for the details. For the most recent version of
+%%%% this license see http://www.gust.org.pl/fonts/licenses/GUST-FONT-LICENSE.txt
+%%%% or http://tug.org/fonts/licenses/GUST-FONT-LICENSE.txt
+
+% GENERAL FONT INFO
+
+pf_info_familyname "LMRomanDunh10";
+pf_info_weight "Normal";
+pf_info_fontname "LMRomanDunh10-Regular";
+pf_info_italicangle 0;
+pf_info_underline -146, 40;
+pf_info_fixedpitch false;
+pf_info_ascender 972.222;
+pf_info_descender -194.44444;
+pf_info_adl 694+112, 194, 0;
+pf_info_pfm family_name, 0, 0; % |pf_info_adl 972, 194, 0;| ?
+blue_fuzz:=0;
+blue_scale:=0.04546; % blue_scale:=0.04379; % CM
+blue_shift:=7;
+pf_info_overshoots (-194,-12), (0,-22), (961,22), (431,17), (944,11);
+pf_info_designsize 10;
+pf_info_space 333.333, 166.667, 111.111;
+pf_info_quad 1000;
+pf_info_extra_space 111.111;
+pf_info_capheight 961.111;
+pf_info_xheight 430.55556, 4.3055;
+
+endinput
+%%%% EOF

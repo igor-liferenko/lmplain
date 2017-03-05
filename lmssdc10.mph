@@ -1,0 +1,31 @@
+%%%% This file belongs to the Latin Modern package. The work is released
+%%%% under the GUST Font License. See the MANIFEST-Latin-Modern.txt and
+%%%% README-Latin-Modern.txt files for the details. For the most recent version of
+%%%% this license see http://www.gust.org.pl/fonts/licenses/GUST-FONT-LICENSE.txt
+%%%% or http://tug.org/fonts/licenses/GUST-FONT-LICENSE.txt
+
+% GENERAL FONT INFO
+
+pf_info_familyname "LMSansDemiCond10";
+pf_info_weight "Demi";
+pf_info_fontname "LMSansDemiCond10-Regular";
+pf_info_italicangle 0;
+pf_info_underline -125, 69;
+pf_info_fixedpitch false;
+pf_info_ascender 694.44444;
+pf_info_descender -166.66667;
+pf_info_adl 694+139, 167, 0;
+pf_info_pfm family_name, 0, 0;
+blue_fuzz:=0;
+blue_scale:=0.04546;
+blue_shift:=7;
+pf_info_overshoots (0,-19), (472,15), (688,25), (716,1);
+pf_info_designsize 10;
+pf_info_space 316.667, 158.333, 105.556;
+pf_info_quad 950;
+pf_info_extra_space 105.556;
+pf_info_capheight 694.44444;
+pf_info_xheight 472.22223, 4.722;
+
+endinput
+%%%% EOF

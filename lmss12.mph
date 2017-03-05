@@ -1,0 +1,31 @@
+%%%% This file belongs to the Latin Modern package. The work is released
+%%%% under the GUST Font License. See the MANIFEST-Latin-Modern.txt and
+%%%% README-Latin-Modern.txt files for the details. For the most recent version of
+%%%% this license see http://www.gust.org.pl/fonts/licenses/GUST-FONT-LICENSE.txt
+%%%% or http://tug.org/fonts/licenses/GUST-FONT-LICENSE.txt
+
+% GENERAL FONT INFO
+
+pf_info_familyname "LMSans12";
+pf_info_weight "Normal";
+pf_info_fontname "LMSans12-Regular";
+pf_info_italicangle 0;
+pf_info_underline -175, 44;
+pf_info_fixedpitch false;
+pf_info_ascender 694.44444;
+pf_info_descender -194.44444;
+pf_info_adl 694+112, 194, 0;
+pf_info_pfm family_name, 0, 0;
+blue_fuzz:=0;
+blue_scale:=0.04546;
+blue_shift:=7;
+pf_info_overshoots (0,-21), (444,15), (655,21), (694,21);
+pf_info_designsize 12;
+pf_info_space 326.384, 163.192, 108.795;
+pf_info_quad 979.154;
+pf_info_extra_space 108.795;
+pf_info_capheight 694.44444;
+pf_info_xheight 444.44444, 5.33333;
+
+endinput
+%%%% EOF
