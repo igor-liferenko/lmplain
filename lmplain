@@ -97,7 +97,7 @@ declare -A CMtoLM=(
   ["cmdunh10"]="lmdunh10"
 )
 if [ "$1" != "" ]; then
-TMP=`echo $FONT|sed s/^cm/lm/`
+TMP=`echo $1|sed s/^lm/cm/`
 PMT="${CMtoLM["$TMP"]}"
 declare -A CMtoLM=(
   ["$TMP"]="$PMT"
