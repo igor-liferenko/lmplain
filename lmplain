@@ -1,0 +1,210 @@
+#!/bin/bash
+
+# TODO: duplicate everything related to quoteright and replace slot 255 in lm-tex.mpe with myquoteright
+# algorithm is as follows: `grep quoteright *.fls' and duplicate everything related to it as myquoteright
+# NOTE: before setting slot 255 to myquoteright, perform this check:
+# replace quoteright with myquoteright in lm-tex.mpe - running `lmplain' must not show any differences
+
+mkdir /tmp/lmplain/ || exit 1 # do not remove automatically in order not to step over a possibly already running lmplain
+cd /tmp/lmplain/
+mkdir -p /usr/local/share/texmf/web2c/tex/
+### use separate slot for apostrophe ###
+rm -fr /usr/local/share/texmf/fonts/{tfm,vf}
+declare -A CMtoLM=(
+  # bold
+  ["cmb10"]="lmb10"
+  # extended bold
+  ["cmbx5"]="lmbx5"
+  ["cmbx6"]="lmbx6"
+  ["cmbx7"]="lmbx7"
+  ["cmbx8"]="lmbx8"
+  ["cmbx9"]="lmbx9"
+  ["cmbx10"]="lmbx10"
+  ["cmbx12"]="lmbx12"
+  # italic extended bold
+  ["cmbxti10"]="lmbxi10"
+  # slanted extended bold
+  ["cmbxsl10"]="lmbxo10"
+  # roman
+  ["cmr5"]="lmr5"
+  ["cmr6"]="lmr6"
+  ["cmr7"]="lmr7"
+  ["cmr8"]="lmr8"
+  ["cmr9"]="lmr9"
+  ["cmr10"]="lmr10"
+  ["cmr12"]="lmr12"
+  ["cmr17"]="lmr17"
+  # italic
+  ["cmti7"]="lmri7"
+  ["cmti8"]="lmri8"
+  ["cmti9"]="lmri9"
+  ["cmti10"]="lmri10"
+  ["cmti12"]="lmri12"
+  # unslanted italic
+  ["cmu10"]="lmu10"
+  # slanted
+  ["cmsl8"]="lmro8"
+  ["cmsl9"]="lmro9"
+  ["cmsl10"]="lmro10"
+  ["cmsl12"]="lmro12"
+  # typewriter
+  ["cmtt8"]="lmtt8"
+  ["cmtt9"]="lmtt9"
+  ["cmtt10"]="lmtt10"
+  ["cmtt12"]="lmtt12"
+  # non-monospaced typewriter
+  ["cmvtt10"]="lmvtt10"
+  # slanted typewriter
+  ["cmsltt10"]="lmtto10"
+  # italic typewriter
+  ["cmitt10"]="lmtti10"
+  # bold typewriter
+  # lmtk10
+  # slanted bold typewriter
+  # lmtko10
+  # light typewriter
+  # lmtl10
+  # slanted light typewriter
+  # lmtlo10
+  # condensed light typewriter
+  # lmtlc10
+  # condensed slanted light typewriter
+  # lmtlco10
+  # caps-and-small-caps roman
+  ["cmcsc10"]="lmcsc10"
+  # caps-and-small-caps typewriter
+  ["cmtcsc10"]="lmtcsc10"
+  # sans-serif
+  ["cmss8"]="lmss8"
+  ["cmss9"]="lmss9"
+  ["cmss10"]="lmss10"
+  ["cmss12"]="lmss12"
+  ["cmss17"]="lmss17"
+  # sans-serif slanted
+  ["cmssi8"]="lmsso8"
+  ["cmssi9"]="lmsso9"
+  ["cmssi10"]="lmsso10"
+  ["cmssi12"]="lmsso12"
+  ["cmssi17"]="lmsso17"
+  # sans-serif extended bold
+  ["cmssbx10"]="lmssbx10"
+  # sans-serif demibold condensed
+  ["cmssdc10"]="lmssdc10"
+  # sans-serif (for quotations)
+  ["cmssq8"]="lmssq8"
+  ["cmssqi8"]="lmssqo8"
+  # dunhill
+  ["cmdunh10"]="lmdunh10"
+)
+if [ "$1" != "" ]; then
+TMP=`echo $FONT|sed s/^cm/lm/`
+PMT="${CMtoLM["$TMP"]}"
+declare -A CMtoLM=(
+  ["$TMP"]="$PMT"
+)
+fi
+declare -A LMtoENC=(
+  ["lmb10"]="e-rm.mp"
+  ["lmsso10"]="e-rm.mp"
+  ["lmsso12"]="e-rm.mp"
+  ["lmtti10"]="e-rmtt.mp"
+  ["lmsso17"]="e-rm.mp"
+  ["lmssq8"]="e-rm.mp"
+  ["lmssdc10"]="e-rm.mp"
+  ["lmtcsc10"]="e-rmtt.mp"
+  ["lmss8"]="e-rm.mp"
+  ["lmss9"]="e-rm.mp"
+  ["lmri12"]="e-rm.mp"
+  ["lmbxi10"]="e-rm.mp"
+  ["lmri10"]="e-rm.mp"
+  ["lmvtt10"]="e-rm.mp"
+  ["lmss10"]="e-rm.mp"
+  ["lmr8"]="e-rm.mp"
+  ["lmssbx10"]="e-rm.mp"
+  ["lmss12"]="e-rm.mp"
+  ["lmr9"]="e-rm.mp"
+  ["lmss17"]="e-rm.mp"
+  ["lmtt8"]="e-rmtt.mp"
+  ["lmr6"]="e-rm.mp"
+  ["lmtt9"]="e-rmtt.mp"
+  ["lmr7"]="e-rm.mp"
+  ["lmr5"]="e-rm.mp"
+  ["lmssqo8"]="e-rm.mp"
+  ["lmsso9"]="e-rm.mp"
+  ["lmsso8"]="e-rm.mp"
+  ["lmbx10"]="e-rm.mp"
+  ["lmbx12"]="e-rm.mp"
+  ["lmcsc10"]="e-rmcsc.mp"
+  ["lmbx6"]="e-rm.mp"
+  ["lmr10"]="e-rm.mp"
+  ["lmbx7"]="e-rm.mp"
+  ["lmr12"]="e-rm.mp"
+  ["lmbx5"]="e-rm.mp"
+  ["lmri7"]="e-rm.mp"
+  ["lmr17"]="e-rm.mp"
+  ["lmri9"]="e-rm.mp"
+  ["lmri8"]="e-rm.mp"
+  ["lmtt12"]="e-rmtt.mp"
+  ["lmu10"]="e-rm.mp"
+  ["lmbx8"]="e-rm.mp"
+  ["lmtt10"]="e-rmtt.mp"
+  ["lmbx9"]="e-rm.mp"
+  ["lmtto10"]="e-rmtt.mp"
+  ["lmbxo10"]="e-rm.mp"
+  ["lmro12"]="e-rm.mp"
+  ["lmro10"]="e-rm.mp"
+  ["lmro9"]="e-rm.mp"
+  ["lmro8"]="e-rm.mp"
+  ["lmdunh10"]="e-rm.mp"
+)
+# for generating tfm files (see below):
+unzip -j /usr/local/lm.zip > /dev/null
+unzip -j /usr/local/mt1.zip -x mt1/samples/\* mt1/extra/\* mt1/pfcommon.dat > /dev/null
+mkdir -p /usr/local/share/texmf/fonts/{vf,tfm}
+chmod +t /usr/local/share/texmf/fonts/{vf,tfm} # FIXME: try without it and remove it
+for FONT in "${!CMtoLM[@]}"; do
+  LMFONT="${CMtoLM["$FONT"]}"
+  FONT=`echo $FONT|sed s/^cm/lm/`
+  tftopl -charcode-format=octal rm-$LMFONT > $FONT.vpl
+  DSIZE=`perl -ne 'print if s/^\(DESIGNSIZE/(FONTDSIZE/' $FONT.vpl`
+  echo "(MAPFONT D 0 (FONTNAME rm-$LMFONT) $DSIZE)" | cat - $FONT.vpl | sponge $FONT.vpl
+  perl -i -pe 's/$/\n   (MAP\n      (SELECTFONT D 0)\n      (SETCHAR O 47)\n      )/ if /^\(CHARACTER O 377/' $FONT.vpl
+  vptovf $FONT.vpl /usr/local/share/texmf/fonts/vf/$FONT.vf /usr/local/share/texmf/fonts/tfm/$FONT.tfm
+  # Generate tfm file separately from making virtual font:
+  cp "${LMtoENC["$LMFONT"]}" lm-tex.mpe
+  # first generate by default to ensure that everything is correct
+  # (uncomment the following 4 lines when you will finish modifying LM-fonts)
+  #mpost -jobname=$FONT "\\relax generating:=1; input $LMFONT" >/dev/null
+  #tftopl -charcode-format=octal rm-$LMFONT > rm-$LMFONT.pl
+  #tftopl -charcode-format=octal $FONT.tfm > $FONT.pl
+  #diff -q rm-$LMFONT.pl $FONT.pl || diff -u rm-$LMFONT.pl $FONT.pl
+  # generate again with changed sources
+  cd /usr/local/lmfonts/
+  if [ "$1" = "" ]; then
+    mpost -jobname=$FONT "\\relax generating:=1; input $LMFONT" >/dev/null
+  else
+    mpost -rec -jobname=$FONT "\\relax generating:=1; input $LMFONT"
+    cat $FONT.fls
+  fi
+  cd /tmp/lmplain/
+  tftopl -charcode-format=octal /usr/local/share/texmf/fonts/tfm/$FONT.tfm > chk-$FONT.pl
+  tftopl -charcode-format=octal /usr/local/lmfonts/$FONT.tfm > $FONT-new.pl
+  grep -v HEADER $FONT-new.pl | sponge $FONT-new.pl # FIXME: remove this line when mpost will be fixed
+  grep -v SEVENBITSAFEFLAG chk-$FONT.pl | sponge chk-$FONT.pl
+  diff -u chk-$FONT.pl $FONT-new.pl
+  mv /usr/local/lmfonts/$FONT.tfm /usr/local/share/texmf/fonts/tfm/
+done
+texhash /usr/local/share/texmf >/dev/null # FIXME: check if it is necessary when you will finish everything
+cd
+rm -fr /tmp/lmplain/
+[ "$1" = "" ] || exit
+tex -ini -enc -jobname lmplain lmplain.ini >/dev/null || echo ERROR
+mv lmplain.fmt /usr/local/share/texmf/web2c/tex/
+### create missing lmtex10 font ###
+tftopl -charcode-format=octal cmtex10 > lmtex10.vpl
+tftopl -charcode-format=octal lmtt10 > lmtex10.pl # we tfm file with corrected metrics for slot 255
+echo "(MAPFONT D 1 (FONTNAME lmtt10) `perl -ne 'print if s/^\(DESIGNSIZE/(FONTDSIZE/' lmtex10.pl`)" | cat - lmtex10.vpl | sponge lmtex10.vpl
+echo "(MAPFONT D 0 (FONTNAME cmtex10) `perl -ne 'print if s/^\(DESIGNSIZE/(FONTDSIZE/' lmtex10.vpl`)" | cat - lmtex10.vpl | sponge lmtex10.vpl
+perl -ne 'print if /^\(CHARACTER O 200/..eof' lmtex10.pl | perl -pe '$x = $1 if /^\(CHARACTER O (.*)/; s/$/\n   (MAP\n      (SELECTFONT D 1)\n      (SETCHAR O $x)\n      )/ if /^\(CHARACTER O /' >> lmtex10.vpl
+vptovf lmtex10.vpl /usr/local/share/texmf/fonts/vf/lmtex10.vf /usr/local/share/texmf/fonts/tfm/lmtex10.tfm 2>/dev/null
+texhash /usr/local/share/texmf >/dev/null

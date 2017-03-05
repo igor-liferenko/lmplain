@@ -1,0 +1,7 @@
+wget --no-verbose -O lm.zip http://mirrors.ctan.org/fonts/lm/lm2004mt1.zip
+wget --no-verbose -O mt1.zip http://mirrors.ctan.org/fonts/utilities/metatype1/metatype1-ver056.zip
+unzip -j lm.zip > /dev/null
+unzip -j mt1.zip -x mt1/samples/\* mt1/extra/\* mt1/pfcommon.dat > /dev/null
+
+for testing individual font, run, e.g., `./lmplain lhr10'
+for installing all fonts, run `./lmplain'
