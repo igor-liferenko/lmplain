@@ -173,7 +173,7 @@ for FONT in "${!CMtoLM[@]}"; do
   #tftopl -charcode-format=octal $FONT.tfm > $FONT.pl
   #diff -q rm-$LMFONT.pl $FONT.pl || diff -u rm-$LMFONT.pl $FONT.pl
   # generate again with changed sources
-  cd /usr/local/lmfonts/
+  cd /usr/local/lmplain/
   rm -f *.fls
   cp "${LMtoENC["$LMFONT"]}" lm-tex.mpe
   if [ "$1" = "" ]; then
@@ -183,11 +183,11 @@ for FONT in "${!CMtoLM[@]}"; do
   fi
   cd /tmp/lmplain/
   tftopl -charcode-format=octal /usr/local/share/texmf/fonts/tfm/$FONT.tfm > chk-$FONT.pl
-  tftopl -charcode-format=octal /usr/local/lmfonts/$FONT.tfm > $FONT-new.pl
+  tftopl -charcode-format=octal /usr/local/lmplain/$FONT.tfm > $FONT-new.pl
   grep -v HEADER $FONT-new.pl | sponge $FONT-new.pl # FIXME: remove this line when mpost will be fixed
   grep -v SEVENBITSAFEFLAG chk-$FONT.pl | sponge chk-$FONT.pl
   diff -u chk-$FONT.pl $FONT-new.pl
-  mv /usr/local/lmfonts/$FONT.tfm /usr/local/share/texmf/fonts/tfm/
+  mv /usr/local/lmplain/$FONT.tfm /usr/local/share/texmf/fonts/tfm/
 done
 texhash /usr/local/share/texmf >/dev/null # FIXME: check if it is necessary when you will finish everything
 cd
