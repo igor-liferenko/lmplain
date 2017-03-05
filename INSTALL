@@ -5,3 +5,8 @@ unzip -j mt1.zip -x mt1/samples/\* mt1/extra/\* mt1/pfcommon.dat > /dev/null
 
 for testing individual font, run, e.g., `./lmplain lmr10'
 for installing all fonts, run `./lmplain'
+
+TODO: duplicate everything related to quoteright and replace slot 255 in lm-tex.mpe with myquoteright
+algorithm is as follows: `cat *.fls|xargs -n1 grep quoteright' and duplicate everything related to it as myquoteright
+NOTE: before setting slot 255 to myquoteright, perform this check:
+replace quoteright with myquoteright in lm-tex.mpe - running `./lmplain' must not produce any output

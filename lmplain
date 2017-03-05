@@ -1,10 +1,4 @@
 #!/bin/bash
-
-# TODO: duplicate everything related to quoteright and replace slot 255 in lm-tex.mpe with myquoteright
-# algorithm is as follows: `cat *.fls|xargs -n1 grep quoteright' and duplicate everything related to it as myquoteright
-# NOTE: before setting slot 255 to myquoteright, perform this check:
-# replace quoteright with myquoteright in lm-tex.mpe - running `./lmplain' must not produce any output
-
 mkdir /tmp/lmplain/ || exit 1 # do not remove automatically in order not to step over a possibly already running lmplain
 cd /tmp/lmplain/
 mkdir -p /usr/local/share/texmf/web2c/tex/
