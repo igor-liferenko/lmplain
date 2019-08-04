@@ -48,7 +48,7 @@ loops of pen-stroked edges, cutting off some parts of a path);
 0.30 (21.08.2001)
 plain_ex.mp -- gets the same numbering as fontbase; internal variable
 of pen_stroke, ang_rel_, is boolean now; macros cut_join and nib_join
-(abreviated later to cut and nib) may have a nib parameter
+(abbreviated later to cut and nib) may have a nib parameter
 optional; skipped nib means obviously default_nib.
 
 0.31 (11.09.2001--22.09.2001)
